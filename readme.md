@@ -13,7 +13,7 @@ Everything went according to the instructions besides what is mention under the 
 2. I set the target java version to v11, as it is the version we will use for the course.
 3. Compilation errors were expected and encountered, and fixed according to the instructions (dependency and package in `App.java`).
 4. I found out that 30 feet is 9.144 meters. This is correct.
-5. I got a suggestion in my console, as the instructions indicated, so I added the dependency ('implementation') to my `build.gradle.kts` file.:
+5. I got a suggestion in my console, as the instructions indicated, so I added the dependency ('implementation') to my `build.gradle.kts` file:
 ```
 Javalin: It looks like you don't have a logger in your project.
 The easiest way to fix this is to add 'slf4j-simple':
