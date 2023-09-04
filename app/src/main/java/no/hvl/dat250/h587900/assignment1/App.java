@@ -36,10 +36,6 @@ public class App {
             "</body>\n" +
             "</html>";
 
-    private static final double IN_TO_METER = 0.0254;
-    private static final double FT_TO_METER = 0.3048;
-    private static final double MI_TO_METER = 1609.344;
-
 
     public static void main(String[] args) {
         Javalin.create()
