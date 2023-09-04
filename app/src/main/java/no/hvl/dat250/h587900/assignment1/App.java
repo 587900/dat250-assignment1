@@ -47,37 +47,29 @@ public class App {
                     ctx.html(WEBPAGE);
                 })
                 .post("/convert", ctx -> {
-                    double value = Double.parseDouble(ctx.formParam("value"));
+                    String strValue = ctx.formParam("value");
                     String fromUnit = ctx.formParam("sunit");
                     String toUnit = ctx.formParam("tunit");
-                    double inMeters;
-                    if (fromUnit.equals("in")) {
-                        inMeters = value * IN_TO_METER;
-                    } else if (fromUnit.equals("ft")) {
-                        inMeters = value * FT_TO_METER;
-                    } else if (fromUnit.equals("mi")) {
-                        inMeters = value * MI_TO_METER;
-                    } else if (fromUnit.equals("m")) {
-                        inMeters = value;
-                    } else {
-                        inMeters = Double.NaN;
+
+                    if (strValue == null || fromUnit == null || toUnit == null) {
+                        ctx.status(400);
+                        return;
                     }
-                    double result;
-                    if (toUnit.equals("in")) {
-                        result = inMeters / IN_TO_METER;
-                    } else if (toUnit.equals("ft")) {
-                        result = inMeters / FT_TO_METER;
-                    } else if (toUnit.equals("mi")) {
-                        result = inMeters / MI_TO_METER;
-                    } else if (toUnit.equals("m")) {
-                        result = inMeters;
-                    } else {
-                        result = Double.NaN;
+
+                    double value = Double.parseDouble(strValue);
+                    Converter.Unit from = Converter.Unit.fromString(fromUnit);
+                    Converter.Unit to = Converter.Unit.fromString(toUnit);
+
+                    if (from == null || to == null) {
+                        ctx.status(400);
+                        return;
                     }
+
+                    double meters = Converter.toMeters(value, from);
+                    double result = Converter.fromMeters(meters, to);
                     ctx.result(Double.toString(result));
                 })
                 .start(9000);
     }
-
 
 }
